@@ -1,7 +1,0 @@
-nome: João Pedro Correia Moura da Silva
-ra: 820146159
-email: joaosilva.6159@aluno.saojudas.br
-
-nome: Gabriel Santos de Carvalho
-ra: 819151151
-email: gabrielcarvalho.1151@aluno.saojudas.br
