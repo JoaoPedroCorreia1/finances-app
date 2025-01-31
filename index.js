@@ -11,31 +11,31 @@ const db = require('./db');
 // funções publicas
 
 app.get('/financas', (req, res) => {
-    obter_financas(req, res);
+  obter_financas(req, res);
 });
 
 app.post('/financas', (req, res) => {
-    const f = req.body;
+  const f = req.body;
 
-    db.inserir (f, (resultado) => {
-        obter_financas(req, res);
-    });
+  db.inserir(f, (resultado) => {
+    obter_financas(req, res);
+  });
 
 })
 
 app.put('/financas', (req, res) => {
 
-    db.atualizar(req.body, (resultado) => {
-        obter_financas(req, res);
-    });
+  db.atualizar(req.body, (resultado) => {
+    obter_financas(req, res);
+  });
 
 })
 
 app.delete('/financas', (req, res) => {
 
-    db.deletar(req.body, (resultado) => {
-        obter_financas(req, res);
-    });
+  db.deletar(req.body, (resultado) => {
+    obter_financas(req, res);
+  });
 
 })
 
@@ -43,28 +43,26 @@ app.delete('/financas', (req, res) => {
 
 const obter_financas = (req, res) => {
 
-    db.listar((financas) => {
+  db.listar((financas) => {
 
     financas = financas.map((f) => {
-
-        return {
-            id: f[0],
-            nome: f[1], 
-            valor: f[2],
-            tipoFinanca: f[3],
-            repeticao: f[4],
-            dia: f[5],
-            mes: f[6],
-            ano: f[7]
-        };
-
-    });
+      return {
+        id: f["id"],
+        nome: f["nome"],
+        valor: f["valor"],
+        tipoFinanca: f["tipoFinancas"],
+        repeticao: f["repeticao"],
+        dia: f["dia"],
+        mes: f["mes"],
+        ano: f["ano"]
+      };
+    })
 
     res.json({ financas });
-    });
+  });
 
 }
 
 app.listen(process.env.PORT, () => {
-    console.log('up and running')
+  console.log('up and running');
 });

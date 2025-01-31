@@ -1,4 +1,4 @@
-const mysql = require('@mysql/xdevapi');
+const mysql = require('mysql2')
 
 function obter_conexao() {
   const opcoes = {
@@ -6,29 +6,25 @@ function obter_conexao() {
     password: process.env.DB_PASSWORD,
     host: process.env.DB_HOST,
     port: process.env.DB_PORT,
-    schema: process.env.DB_NAME
-  }
+    database: process.env.DB_NAME
+  };
 
-  let conexao = mysql.getSession(opcoes)
+  let conexao = mysql.createConnection(opcoes);
 
-  return conexao
-};
+  return conexao;
+}
 
 async function listar(callback) {
-  conexao = await obter_conexao()
+  conexao = await obter_conexao();
 
-  const query = `SELECT * FROM tb_financas`
+  const query = `SELECT * FROM tb_financas`;
 
-  conexao
-    .sql(query)
-    .execute()
-    .then((result) => {
-      let resultado = result.toArray()[0]
-      callback(resultado);
-    })
-};
+  conexao.query(query, (err, result) => {
+    callback(result);
+  });
+}
 
-async function inserir (financa, callback) {
+async function inserir(financa, callback) {
   const conexao = await obter_conexao();
 
   const query =
@@ -48,18 +44,14 @@ async function inserir (financa, callback) {
       ${financa.repeticao},
       ${financa.dia},
       ${financa.mes},
-      ${financa.ano})`
+      ${financa.ano})`;
 
-  conexao
-    .sql(query)
-    .execute()
-    .then((result) => {
-      let resultado = result.toArray()[0]
-      callback(resultado);
-    })
+  conexao.query(query, (err, result) => {
+    callback(result);
+  })
 };
 
-async function atualizar (financa, callback) {
+async function atualizar(financa, callback) {
   const conexao = await obter_conexao();
 
   const query =
@@ -73,33 +65,25 @@ async function atualizar (financa, callback) {
       dia = ${financa.dia}, 
       mes = ${financa.mes}, 
       ano = ${financa.ano}
-    WHERE id = ${financa.id}`
+    WHERE id = ${financa.id}`;
 
-  conexao
-    .sql(query)
-    .execute()
-    .then((result) => {
-      let resultado = result.toArray()[0]
-      callback(resultado);
-    })
+  conexao.query(query, (err, result) => {
+    callback(result);
+  });
 }
 
-async function deletar (id, callback) {
+async function deletar(id, callback) {
   const conexao = await obter_conexao();
 
   const query =
     `DELETE FROM 
       tb_financas 
     WHERE 
-      id = ${id}`
+      id = ${id}`;
 
-  conexao
-    .sql(query)
-    .execute()
-    .then((result) => {
-      let resultado = result.toArray()[0]
-      callback(resultado);
-    })
+  conexao.query(query, (err, result) => {
+    callback(result);
+  })
 }
 
 module.exports = {
