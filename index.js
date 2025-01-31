@@ -8,22 +8,17 @@ app.use(cors());
 
 const db = require('./db');
 
-const financas = []
-
-let id = 1;
-
 // funções publicas
 
 app.get('/financas', (req, res) => {
-    obterfinancas(req, res);
+    obter_financas(req, res);
 });
 
-// adiciona finança
 app.post('/financas', (req, res) => {
     const f = req.body;
 
     db.inserir (f, (resultado) => {
-        obterfinancas(req, res);
+        obter_financas(req, res);
     });
 
 })
@@ -31,28 +26,36 @@ app.post('/financas', (req, res) => {
 app.put('/financas', (req, res) => {
 
     db.atualizar(req.body, (resultado) => {
-        obterfinancas(req, res);
+        obter_financas(req, res);
+    });
+
+})
+
+app.delete('/financas', (req, res) => {
+
+    db.deletar(req.body, (resultado) => {
+        obter_financas(req, res);
     });
 
 })
 
 // funções privadas
 
-const obterfinancas = (req, res) => {
+const obter_financas = (req, res) => {
 
     db.listar((financas) => {
 
     financas = financas.map((f) => {
 
         return {
-            id: f.id,
-            nome: f.nome, 
-            valor: f.valor,
-            tipoFinanca: f.tipoFinanca,
-            repeticao: f.repeticao,
-            dia: f.dia,
-            mes: f.mes,
-            ano: f.ano
+            id: f[0],
+            nome: f[1], 
+            valor: f[2],
+            tipoFinanca: f[3],
+            repeticao: f[4],
+            dia: f[5],
+            mes: f[6],
+            ano: f[7]
         };
 
     });
@@ -62,4 +65,6 @@ const obterfinancas = (req, res) => {
 
 }
 
-app.listen(process.env.PORT, () => console.log('up and running'));
+app.listen(process.env.PORT, () => {
+    console.log('up and running')
+});

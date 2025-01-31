@@ -1,5 +1,3 @@
-USE projeto_include;
-
 CREATE DATABASE financas_database;
 
 USE financas_database;

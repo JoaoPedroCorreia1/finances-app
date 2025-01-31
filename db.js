@@ -1,94 +1,110 @@
-const mysql = require('mysql2');
+const mysql = require('@mysql/xdevapi');
 
-const obterConexao = () => {
-
-    return mysql.createConnection({
-    host: process.env.DB_HOST,
-    database: process.env.DB_NAME,
+function obter_conexao() {
+  const opcoes = {
     user: process.env.DB_USER,
     password: process.env.DB_PASSWORD,
-  });
+    host: process.env.DB_HOST,
+    port: process.env.DB_PORT,
+    schema: process.env.DB_NAME
+  }
 
+  let conexao = mysql.getSession(opcoes)
+
+  return conexao
 };
 
-const listar = (callback) => {
+async function listar(callback) {
+  conexao = await obter_conexao()
 
-    const conexao = obterConexao();
+  const query = `SELECT * FROM tb_financas`
 
-    conexao.query(
-    'SELECT * from tb_financas',
-    (erro, resultado) => {
-    // console.log(`resultado: ${JSON.stringify(resultado)}`);
-    callback(resultado);
-    });
-
-};
-
-const inserir = (financa, callback) => {
-
-    const conexao = obterConexao();
-
-    conexao.execute(
-    `INSERT INTO tb_financas (
-        nome, 
-        valor, 
-        tipoFinanca, 
-        repeticao, 
-        dia, 
-        mes, 
-        ano) 
-
-        VALUES (?, ?, ?, ?, ?, ?, ?)`,
-    [
-        financa.nome, 
-        financa.valor,
-        financa.tipoFinanca,
-        financa.repeticao,
-        financa.dia,
-        financa.mes,
-        financa.ano
-    ],
-
-    (erro, resultado) => {
-      //   console.log(`resultado: ${JSON.stringify(resultado)}`);
+  conexao
+    .sql(query)
+    .execute()
+    .then((result) => {
+      let resultado = result.toArray()[0]
       callback(resultado);
-    }
-
-    );
+    })
 };
 
-const atualizar = (financa, callback) => {
-    const conexao = obterConexao();
-    conexao.execute(
-    `UPDATE tb_financas SET 
-    nome = ?,  
-    valor = ?, 
-    tipoFinanca = ?,  
-    repeticao = ?, 
-    dia = ?, 
-    mes = ?, 
-    ano = ?
-    WHERE id = ?`,
-    [
-        financa.nome, 
-        financa.valor,
-        financa.tipoFinanca,
-        financa.repeticao,
-        financa.dia,
-        financa.mes,
-        financa.ano,
-        financa.id
-    ],
+async function inserir (financa, callback) {
+  const conexao = await obter_conexao();
 
-    (erro, resultado) => {
-        callback(resultado);
-    }
+  const query =
+    `INSERT INTO tb_financas (
+      nome, 
+      valor, 
+      tipoFinanca, 
+      repeticao, 
+      dia, 
+      mes, 
+      ano) 
 
-    );
+    VALUES (
+      "${financa.nome}",
+      ${financa.valor},
+      ${financa.tipoFinanca},
+      ${financa.repeticao},
+      ${financa.dia},
+      ${financa.mes},
+      ${financa.ano})`
+
+  conexao
+    .sql(query)
+    .execute()
+    .then((result) => {
+      let resultado = result.toArray()[0]
+      callback(resultado);
+    })
 };
+
+async function atualizar (financa, callback) {
+  const conexao = await obter_conexao();
+
+  const query =
+    `UPDATE 
+      tb_financas 
+    SET 
+      nome = "${financa.nome}",  
+      valor = ${financa.valor}, 
+      tipoFinanca = ${financa.tipoFinanca},  
+      repeticao = ${financa.repeticao}, 
+      dia = ${financa.dia}, 
+      mes = ${financa.mes}, 
+      ano = ${financa.ano}
+    WHERE id = ${financa.id}`
+
+  conexao
+    .sql(query)
+    .execute()
+    .then((result) => {
+      let resultado = result.toArray()[0]
+      callback(resultado);
+    })
+}
+
+async function deletar (id, callback) {
+  const conexao = await obter_conexao();
+
+  const query =
+    `DELETE FROM 
+      tb_financas 
+    WHERE 
+      id = ${id}`
+
+  conexao
+    .sql(query)
+    .execute()
+    .then((result) => {
+      let resultado = result.toArray()[0]
+      callback(resultado);
+    })
+}
 
 module.exports = {
-    listar,
-    inserir,
-    atualizar
+  listar,
+  inserir,
+  atualizar,
+  deletar
 };
