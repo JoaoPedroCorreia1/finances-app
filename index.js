@@ -50,7 +50,7 @@ const obter_financas = (req, res) => {
         id: f["id"],
         nome: f["nome"],
         valor: f["valor"],
-        tipoFinanca: f["tipoFinancas"],
+        tipoFinanca: f["tipoFinanca"],
         repeticao: f["repeticao"],
         dia: f["dia"],
         mes: f["mes"],
@@ -58,7 +58,7 @@ const obter_financas = (req, res) => {
       };
     })
 
-    res.json({ financas });
+    res.json( {financas} );
   });
 
 }
