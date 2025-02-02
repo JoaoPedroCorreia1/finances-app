@@ -2,13 +2,14 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Financa } from './model/financa';
 import { Subject } from 'rxjs';
+import { environment } from '../environments/environment';
 
 @Injectable({
   providedIn: 'root'
 })
 export class FinancaService {
 
-  private baseURL: string = `http://localhost:3000/financas`;
+  private baseURL: string = environment.FINANCAS_API_PATH;
 
   private colecaoAtualizada = new Subject<Financa[]>();
 

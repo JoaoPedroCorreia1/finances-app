@@ -3,7 +3,8 @@
 // The list of file replacements can be found in `angular.json`.
 
 export const environment = {
-  production: false
+  production: false,
+  FINANCAS_API_PATH: "https://finances-app-uwe2.onrender.com/financas"
 };
 
 /*

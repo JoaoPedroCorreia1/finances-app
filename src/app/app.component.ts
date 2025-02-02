@@ -13,6 +13,7 @@ import { SelecionadorGrafico } from './model/selecionador-grafico';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent implements OnInit{
+  title = "finances-app"
 
   diaAtual: any;
   mesAtual: any;
