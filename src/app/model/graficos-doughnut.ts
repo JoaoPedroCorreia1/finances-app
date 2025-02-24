@@ -9,7 +9,7 @@ export class GraficosDoughnut {
         let {receitaTotal, despesaTotal} = this.calcularReceitaDespesa(financas);
         
         const dadosGraficoDoughnutTotal = this.gerarDadosGraficoDoughnut(
-            ["Receita", "Despesa"],
+            ["Income", "Expense"],
             [receitaTotal, despesaTotal],
             ['#2196F3', '#F44336']
         )
@@ -27,7 +27,7 @@ export class GraficosDoughnut {
         if(balanco >= 0){
 
             dadosGraficoDoughnutBalanco = this.gerarDadosGraficoDoughnut(
-                ["Balanço"],
+                ["Balance"],
                 [balanco],
                 ['#2196F3'] // Azul
             );
@@ -35,7 +35,7 @@ export class GraficosDoughnut {
         } else {
 
             dadosGraficoDoughnutBalanco = this.gerarDadosGraficoDoughnut(
-                ["Balanço"],
+                ["Balance"],
                 [balanco],
                 ['#F44336'] // Vermelho
             );

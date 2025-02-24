@@ -9,9 +9,9 @@ export class GraficosBarra {
         ano: number
         ): any{
         
-        const meses = ['jan', 'fev', 'mar', 'abr',
-        'maio', 'jun', 'jul', 'ago', 'set', 'out',
-        'nov', 'dez'];
+        const meses = ['jan', 'feb', 'mar', 'apr',
+        'may', 'jun', 'jul', 'aug', 'sep', 'oct',
+        'nov', 'dec'];
 
         var receitasData = [];
         var despesasData = [];
@@ -127,12 +127,12 @@ export class GraficosBarra {
             labels: Label,
             datasets: [
             {
-                label: 'Receita',
+                label: 'Income',
                 backgroundColor: '#42A5F5',
                 data: receitasData
             },
             {
-                label: 'Despesa',
+                label: 'Expense',
                 backgroundColor: '#F44336',
                 data: despesasData
             }
