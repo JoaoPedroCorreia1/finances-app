@@ -14,7 +14,8 @@ span, input{
 .adicionar-botao{
     display: flex;
     justify-content: flex-end;
-    margin: 12px 0;
+    margin-top: 12px;
+    margin-right: 12px;
 }
 
 .financa{

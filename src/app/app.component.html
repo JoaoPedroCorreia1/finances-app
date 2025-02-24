@@ -3,10 +3,10 @@
   <p-tabView (onChange)="eventoTabViewPrincipal()">
     
     <p-tabPanel 
-    header="Finanças">
+    header="Finances">
 
       <p-card
-      header="Inserir Finança"
+      header="Add Finance"
       >
 
         <form #financaForm="ngForm" (ngSubmit)="eventoBotaoAdicionarFinanca(financaForm)">
@@ -61,7 +61,7 @@
 
           <div class="adicionar-botao">
 
-            <p-button label="Adicionar" type="submit" icon="pi pi-check"></p-button>
+            <p-button label="Add" type="submit"></p-button>
 
           </div>
 
@@ -70,7 +70,7 @@
       </p-card>
 
       <p-card
-      header="Histórico"  
+      header="History"  
       >
         <span class="p-float-label"> 
 
@@ -141,7 +141,7 @@
     </p-tabPanel>
 
     <p-tabPanel 
-    header="Gráficos"> 
+    header="Graphs"> 
 
       <p-card>
 
@@ -211,7 +211,7 @@
         </p-card>
 
         <p-card
-        header="Barras Verticais">   
+        header="Vertical Bar">   
         
           <span class="grafico-botao">  
 

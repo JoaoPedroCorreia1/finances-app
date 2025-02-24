@@ -45,8 +45,8 @@ export class AppComponent implements OnInit{
   //   tela
   telaAtual: string = "Tela Principal";
   //  rotulos
-  rotuloNumero: any = "Qual o valor?";
-  rotuloNome: any = "Qual o nome?";
+  rotuloNumero: any = "What's the value?";
+  rotuloNome: any = "What's the name?";
 
   
   financasVisiveis: Financa[] = [];
@@ -88,35 +88,35 @@ export class AppComponent implements OnInit{
     };
 
     this.opcoesBotaoReceitaOuDespesa = [
-      {opcao: "Receita", valor: 0},
-      {opcao: "Despesa", valor: 1},
+      {opcao: "Income", valor: 0},
+      {opcao: "Expense", valor: 1},
     ];
 
     this.opcoesBotaoTipoSelecao = [
-      {opcao: "Dia", valor: 0},
-      {opcao: "Mes", valor: 1},
-      {opcao: "Ano", valor: 2},
+      {opcao: "Day", valor: 0},
+      {opcao: "Month", valor: 1},
+      {opcao: "Year", valor: 2},
     ];
 
     this.opcoesBotaoTipoGraficoDoughnut = [
       {opcao: "Total", valor: 0},
-      {opcao: "Balanço", valor: 1},
+      {opcao: "Balance", valor: 1},
     ];
 
     this.opcoesBotaoTipoGraficoTabela = [
-      {opcao: "Mensal", valor: 0},
-      {opcao: "Anual", valor: 1},
+      {opcao: "Month", valor: 0},
+      {opcao: "Year", valor: 1},
     ];
 
     this.opcoesBotaoData = [
-      {opcao: "Data Atual", valor: true},
-      {opcao: "Selecionar", valor: false},
+      {opcao: "Current Date", valor: true},
+      {opcao: "Select", valor: false},
     ];
 
     this.opcoesBotaoRepeticao =[
-      {opcao: "Sem Repetição", valor: 0},
-      {opcao: "Mensal", valor: 1},
-      {opcao: "Anual", valor: 2},
+      {opcao: "No Repetition", valor: 0},
+      {opcao: "Monthly", valor: 1},
+      {opcao: "Anualy", valor: 2},
     ]
   }
 
@@ -273,22 +273,22 @@ export class AppComponent implements OnInit{
 
   //  Mensagens
   resetarMensagemErro(){
-    this.rotuloNumero = "Qual o valor?";
-    this.rotuloNome = "Qual o nome?";
+    this.rotuloNumero = "What's the value?";
+    this.rotuloNome = "What's the nome?";
   }
 
   exibirMensagemErro(erro: string){
 
     if(erro == "Erro Valor Negativo"){
-      this.rotuloNumero = "Qual o valor? (número positivo)"
+      this.rotuloNumero = "What's the value? (positive number)"
     }
 
     if(erro == "Erro Valor Alto"){
-      this.rotuloNumero = "Qual o valor? (max 22 números)"
+      this.rotuloNumero = "What's the value? (max 22 digits)"
     }
 
     if(erro == "Erro Nome Grande"){
-      this.rotuloNome = "Qual o nome? (max 20 letras)"
+      this.rotuloNome = "What's the name? (max 20 digits)"
     }
   }
 
